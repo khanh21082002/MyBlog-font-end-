@@ -25,15 +25,16 @@ export const updatePosts = async (req, res) => {
     try {
         const updatedPost = req.body;
         const post = await PostModel.findByIdAndUpdate(
-            { _id: updatePosts._id },
+            req.params.id, 
             updatedPost,
-            { new: true }
-        )
-        res.json(post)
+            { new: true } ,
+        );
+        console.log(post)
+        res.status(200).json(post);
     } catch (error) {
-        res.status(404).json({ message: error.message })
+        res.status(405).json({ message: error.message });
     }
-}
+};
 
 export const deletePosts = async (req, res) => {
     try {
